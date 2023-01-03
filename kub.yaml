@@ -1,8 +1,12 @@
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    name:  demoappspace
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
     name:  demoapp
-    namespace: default
+    namespace: demoappspace
     labels:
       app:  demoapp
   spec:
@@ -23,7 +27,7 @@
             # - Each init container must complete successfully before the next one starts.
         containers:
         - name:  demoapp
-          image:  democlustorregistry.azurecr.io/demo:latest
+          image:  democlustorregistry.azurecr.io/demo
           resources:
             requests:
               cpu: 100m
