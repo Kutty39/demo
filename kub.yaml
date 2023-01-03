@@ -1,12 +1,7 @@
-- apiVersion: v1
-  kind: Namespace
-  metadata:
-    name:  demoappspace
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
     name:  demoapp
-    namespace: demoappspace
     labels:
       app:  demoapp
   spec:
@@ -27,7 +22,7 @@
             # - Each init container must complete successfully before the next one starts.
         containers:
         - name:  demoapp
-          image:  democlustorregistry.azurecr.io/demo
+          image:  democlustorregistry.azurecr.io/demo:v2
           resources:
             requests:
               cpu: 100m
@@ -38,17 +33,3 @@
           ports:
           - containerPort:  80
             name:  demoapp
-- apiVersion: v1
-  kind: Service
-  metadata:
-    name: demoapp
-  spec:
-    type: LoadBalancer
-    selector:
-      app: demoapp
-    ports:
-    - name: app-port
-      port: 80
-      targetPort: 8080
-      protocol: TCP
-
