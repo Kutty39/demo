@@ -1,50 +1,49 @@
-- apiVersion: v1
-  kind: Namespace
-  metadata:
-    name: demoapp
-  spec:
-    finalizers:
-      - kubernetes
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
-    name: demoapp
-    namespace: demoapp
+    name:  demoapp
+    namespace: default
+    labels:
+      app:  demoapp
   spec:
-    replicas: 2
     selector:
       matchLabels:
         app: demoapp
+    replicas: 2
     template:
       metadata:
         labels:
-          app: demoapp
+          app:  demoapp
       spec:
         nodeSelector:
-          kubernetes.io/os: linux
+            kubernetes.io/os: linux
+        # initContainers:
+          # Init containers are exactly like regular containers, except:
+            # - Init containers always run to completion.
+            # - Each init container must complete successfully before the next one starts.
         containers:
-          - name: demoapp
-            image: democlustorregistry.azurecr.io/demo:v2
-            ports:
-              - containerPort: 8080
-            resources:
-              requests:
-                cpu: '2'
-                memory: 500M
-              limits:
-                cpu: '256'
-                memory: 11400G
+        - name:  demoapp
+          image:  demo:latest
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: '256'
+              memory: 11400G
+          ports:
+          - containerPort:  80
+            name:  demoapp
 - apiVersion: v1
   kind: Service
   metadata:
-    name: demo-service
-    namespace: demoapp
+    name: demoapp
   spec:
-    type: LoadBalancer
-    ports:
-      - targetPort: 8080
-        name: app-port
-        port: 8080
-        protocol: TCP
     selector:
       app: demoapp
+    ports:
+    - name: app-port
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+      
