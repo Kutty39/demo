@@ -7,7 +7,7 @@ name: demoAuto
 env:
     ACR_RESOURCE_GROUP: democlustorregistry_group
     AZURE_CONTAINER_REGISTRY: democlustorregistry
-    CLUSTER_NAME: demoappcluster
+    CLUSTER_NAME: finalcluster
     CLUSTER_RESOURCE_GROUP: clustor
     CONTAINER_NAME: demo
     DEPLOYMENT_MANIFEST_PATH: |
@@ -55,4 +55,4 @@ jobs:
                 action: deploy
                 images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
                 manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
-                namespace: namespace-workflow-1672764930897
+                namespace: default
