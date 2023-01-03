@@ -23,7 +23,7 @@
             # - Each init container must complete successfully before the next one starts.
         containers:
         - name:  demoapp
-          image:  demo:latest
+          image:  democlustorregistry.azurecr.io/demo:latest
           resources:
             requests:
               cpu: 100m
@@ -46,4 +46,3 @@
       port: 80
       targetPort: 8080
       protocol: TCP
-      
