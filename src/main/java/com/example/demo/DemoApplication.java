@@ -17,5 +17,10 @@ public class DemoApplication {
     public String home() {
         return "Hello World!";
     }
+    
+    @RequestMapping("/nextendpoint")
+    public String home() {
+        return "this is next endpoint!";
+    }
 
 }
