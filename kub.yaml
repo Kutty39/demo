@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name:  demoapp
-  namespace: default
+  namespace: namespace-workflow-1672764930897
   labels:
     app:  demoapp
 spec:
